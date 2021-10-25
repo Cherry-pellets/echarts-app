@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            color: ['red', 'green', 'black', 'blue'],
+            title: {
+                text: 'echarts图'
+            },
+            tooltip: {
+                show: true
+            },
+            // legend: {
+            //     data:['销量', '价格']
+            // },
+            xAxis: {
+                type: 'value',
+                name: '人数',
+                show: false,
+                // boundaryGap: [0, 1000],
+                min: 0, // 当设置成 function 形式时，可以根据计算得出的数据最大最小值设定坐标轴的最小值
+                max: 100, 
+                // splitNumber: 10, // 坐标轴的分割段数
+                // axisLine: {  // 坐标轴
+                //     // show: false,  // 是否显示坐标轴 
+                // },
+                // axisTick: {  // 坐标刻度
+                //     show: false,
+                // },
+                // axisLabel: { // 刻度标签
+                //     // show: false,
+                //     formatter: '{MMMM}', // 坐标刻度标签的格式器
+                // }
+                // data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {
+                type: 'category',
+                name: '酒店',
+                // data: ['name1', 'name2', 'name3'],
+                axisTick: {  // 坐标刻度
+                    show: false,
+                },
+            },
+            series: [
+                {
+                    name: '人数',
+                    type: 'bar', // 柱状图
+                    data: [
+                        {
+                            value: 20,
+                            name: 'name1'
+                        },
+                        {
+                            value: 30,
+                            name: 'name2'
+                        }
+                    ],
+                    label: { // 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称
+                        show: true,
+                        position: 'right', // 位置
+                        distance: 10, // 距离图形元素的距离。
+                    },
+                    itemStyle: {
+                        color: 'red'
+                    }
+                },
+                // {
+                //     name: '人数',
+                //     type: 'bar', // 柱状图
+                //     data: [10],
+                //     label: { // 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称
+                //         show: true,
+                //         position: 'right', // 位置
+                //         distance: 10, // 距离图形元素的距离。
+                //     },
+                //     itemStyle: {
+                //         color: 'green'
+                //     }
+                // },
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
