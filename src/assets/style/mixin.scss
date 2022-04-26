@@ -1,0 +1,50 @@
+// 不换行
+@mixin no-wrap() {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+// 多行省略号
+@mixin no-wrap-line-clamp($line:2) {
+    display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+}
+
+// 扩展点击区域
+@mixin extend-after-click() {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+    }
+}
+
+@mixin extend-before-click() {
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+    }
+}
+
+@function px2rem($px,$base-font-size:20px) {
+    @if(unit($px) != px) {
+      @warn "px2rem函数接收参数单位是px";
+      @return $px;
+    }
+  
+    @return ($px / $base-font-size) * 1rem;
+}

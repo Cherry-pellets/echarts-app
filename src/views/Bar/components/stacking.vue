@@ -1,7 +1,7 @@
 <template>
   <!-- 纵向柱状图-柱体堆叠 -->
   <div class="stacking">
-    <div id="stackingChart" style="width: 600px; height: 400px"></div>
+    <div ref="stackingChart" class="myChart"></div>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
   methods: {
     initChart() {
     //   let that = this;
-      this.myChart = this.$echarts.init(document.getElementById("stackingChart"));
+      this.myChart = this.$echarts.init(this.$refs.stackingChart);
       // 指定图表的配置项和数据
       const option = {
         grid: {
@@ -48,29 +48,51 @@ export default {
                 },
           },
         ],
+        // 方法1
         series: [
-            {
-                name: '直接访问',
-                type: 'bar',
-                barGap:'-100%',//重叠效果(可放在任意一个组中)
-                data: [320, 332, 301, 334, 390]
-            },
             {
                 name: '1月',
                 type: 'bar',
+                stack: 'overlap', //堆叠效果(字符需要统一)
                 data: [120, 132, 101, 134, 90]
             },
             {
                 name: '2月',
                 type: 'bar',
+                stack: 'overlap',
                 data: [220, 182, 191, 234, 290]
             },
             {
                 name: '3月',
                 type: 'bar',
+                stack: 'overlap',
                 data: [150, 232, 201, 154, 190]
             }
         ]
+        // 方法2(似乎有点问题)
+        // series: [
+        //     {
+        //         name: '直接访问',
+        //         type: 'bar',
+        //         barGap:'-100%',//重叠效果(可放在任意一个组中)
+        //         data: [320, 332, 301, 334, 390]
+        //     },
+        //     {
+        //         name: '1月',
+        //         type: 'bar',
+        //         data: [120, 132, 101, 134, 90]
+        //     },
+        //     {
+        //         name: '2月',
+        //         type: 'bar',
+        //         data: [220, 182, 191, 234, 290]
+        //     },
+        //     {
+        //         name: '3月',
+        //         type: 'bar',
+        //         data: [150, 232, 201, 154, 190]
+        //     }
+        // ]
       };
       // 使用刚指定的配置项和数据显示图表。
       this.myChart.setOption(option);
@@ -83,4 +105,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.stacking {
+  box-sizing: border-box;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.07);
+  border-radius: 2px;
+  .myChart {
+    width: 100%;
+    height: 400px;
+  }
+}
 </style>

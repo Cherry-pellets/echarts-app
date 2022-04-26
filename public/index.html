@@ -11,6 +11,33 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <script>
+			;(function(doc, win) {
+				var docEl = doc.documentElement,
+					resizeEvt =
+						'orientationchange' in win
+							? 'orientationchange'
+							: 'resize',
+					recalc = function() {
+						var clientWidth = docEl.clientWidth
+						if (!clientWidth) {
+							return
+						}
+						docEl.style.fontSize = 20 * (clientWidth / 1920) + 'px' // 在1920下，1 rem = 20px
+						if (doc.body) {
+							doc.body.style.fontSize = docEl.style.fontSize
+						}
+						// console.log(docEl.style.fontSize)
+					}
+
+				recalc()
+				if (!doc.addEventListener) {
+					return
+				}
+				win.addEventListener(resizeEvt, recalc, false)
+				doc.addEventListener('DOMContentLoaded', recalc, false)
+			})(document, window)
+		</script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
